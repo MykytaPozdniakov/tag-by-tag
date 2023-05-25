@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .page-item {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .page-item:hover {
+    background-color: #eee;
+  }
+  
+  .page-item.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  .page-item.disabled {
+    cursor: not-allowed;
+    background-color: #fff;
+    color: #ccc;
+    border-color: #ccc;
+  }
+  
