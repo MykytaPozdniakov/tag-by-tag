@@ -32,7 +32,7 @@ const Header = () => {
           </div>
         </div>
       ) : (
-        <GoogleSignInButton />
+        <Link to="/signin">Sign in</Link>
       )}
     </header>
   );
