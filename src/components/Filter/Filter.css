@@ -1,0 +1,10 @@
+/* Filter.css */
+
+.filter {
+    width: 200px;
+  }
+  
+  .filter .MuiFormControl-root {
+    width: 100%;
+  }
+  

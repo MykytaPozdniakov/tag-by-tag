@@ -9,17 +9,17 @@ export function makeServer({ environment = 'development' } = {}) {
       userRole: Model,
       project: Model.extend({
         labels: hasMany(),
-        datasets: hasMany(),
+        tasks: hasMany()
       }),
       label: Model.extend({
         project: belongsTo(),
       }),
-      dataset: Model.extend({
+      task: Model.extend({
         project: belongsTo(),
-        datasetElements: hasMany(),
+        taskElements: hasMany(),
       }),
-      datasetElement: Model.extend({
-        dataset: belongsTo(),
+      taskElement: Model.extend({
+        task: belongsTo(),
       }),
     },
 
@@ -34,23 +34,45 @@ export function makeServer({ environment = 'development' } = {}) {
       this.resource('userRoles');
       this.resource('projects');
       this.resource('labels');
-      this.resource('datasets');
-      this.resource('datasetElements');
+      this.resource('tasks');
+      this.resource('taskElements');
 
+      this.get('/projects/:id', (schema, request) => {
+        const projectId = request.params.id;
+        return schema.projects.find(projectId);
+      });      
+
+      this.post('/projects', (schema, request) => {
+        const newProject = JSON.parse(request.requestBody);
+        return schema.projects.create(newProject);
+      });
+      
+      this.patch('/projects/:id', (schema, request) => {
+        const updatedProject = JSON.parse(request.requestBody);
+        const projectId = request.params.id;
+        let project = schema.projects.find(projectId);
+        return project.update(updatedProject);
+      });
+
+      this.delete('/projects/:id', (schema, request) => {
+        const projectId = request.params.id;
+        return schema.projects.find(projectId).destroy();
+      });
+      
       // Дополнительные маршруты для работы с вложенными ресурсами
       this.get('/projects/:id/labels', (schema, request) => {
         const projectId = request.params.id;
         return schema.labels.where({ projectId });
       });
 
-      this.get('/projects/:id/datasets', (schema, request) => {
+      this.get('/projects/:id/tasks', (schema, request) => {
         const projectId = request.params.id;
-        return schema.datasets.where({ projectId });
+        return schema.tasks.where({ projectId });
       });
 
-      this.get('/datasets/:id/datasetElements', (schema, request) => {
+      this.get('/tasks/:id/taskElements', (schema, request) => {
         const datasetId = request.params.id;
-        return schema.datasetElements.where({ datasetId });
+        return schema.tasks.where({ datasetId });
       });
     },
   });

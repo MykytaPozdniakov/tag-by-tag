@@ -13,3 +13,40 @@
     gap: 1rem;
   }
   
+/* Filter styles */
+.filter {
+  margin-bottom: 20px;
+  /* Add your styles here */
+}
+
+/* Search styles */
+.search {
+  margin-bottom: 20px;
+  /* Add your styles here */
+}
+
+/* Project list styles */
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.project-item {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

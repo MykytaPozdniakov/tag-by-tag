@@ -1,41 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Header, MainContent, Footer, ProjectsList } from '../../components';
+import { Header, MainContent, Footer, Search, Filter, PaginationComponent, ProjectList } from '../../components';
+import './ProjectsPage.css'; // Импортируйте ваш файл стилей
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
-  const fetchProjects = async (page) => {
-    // Замените на запрос к серверу, когда API будет доступен
-    const response = await fetch(`/api/projects?page=${page}`);
-    const data = await response.json();
-
-    setProjects(data.projects);
-    setTotalPages(data.totalPages);
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    fetchProjects(page);
-  };
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    fetchProjects(currentPage);
-  }, []);
+    fetch('/api/projects')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => setProjects(data.projects))
+      .catch(error => console.log('Fetch error: ', error));
+  }, []); // Empty dependency array
+
+  // TODO: Implement logic to filter and search projects
 
   return (
-    <div className="projects-page">
+    <div>
       <Header />
-      <div className="main-section">
+      <div>
         <MainContent>
-          <h2>Projects</h2>
-          <ProjectsList
-            projects={projects}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <div className="search-filter-container">
+            <Filter className="filter" value={filter} onChange={setFilter} />
+            <Search className="search" value={searchQuery} onChange={setSearchQuery} />
+          </div>
+          <ProjectList className="project-list" projects={projects} />
+          <PaginationComponent className="pagination" count={10} page={page} onChange={setPage} />
         </MainContent>
       </div>
       <Footer />
