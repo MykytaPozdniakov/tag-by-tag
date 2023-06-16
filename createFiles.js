@@ -18,5 +18,6 @@ export default ${pageName};
 `;
 
 fs.writeFileSync(path.join(basePath, 'index.js'), indexContent);
-fs.writeFileSync(path.join(basePath, `${pageName}.js`), '');
+fs.writeFileSync(path.join(basePath, `${pageName}.stories.js`));
+fs.writeFileSync(path.join(basePath, `${pageName}.jsx`), '');
 fs.writeFileSync(path.join(basePath, `${pageName}.css`), '');

@@ -1,26 +1,20 @@
-// Header.js
-
 import React from 'react';
-import './Header.css'; // Импортируйте ваш файл стилей
-import GoogleSignInButton from './../GoogleSignInButton';
-import { useAuth } from '../../AuthContext';
+import './Header.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from './../../AuthContext';
 
-const Header = () => {
+const Header = ({ links }) => {
   const auth = useAuth();
 
   return (
     <header className="header">
-      {/* Ваши другие элементы */}
       <nav className="menu">
         <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/projects">Projects</Link>
-          </li>
-          {/* Добавьте другие ссылки для навигации */}
+          {links.map((link, index) => (
+            <li key={index}>
+              <Link to={link.url}>{link.name}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
       {auth.isAuthenticated() ? (
