@@ -24,7 +24,7 @@ const ProjectsPage = () => {
 
   return (
     <div>
-      <Header />
+      <Header links={[]}/>
       <div>
         <MainContent>
           <div className="search-filter-container">
