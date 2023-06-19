@@ -1,77 +1,82 @@
 import React from 'react';
-import { Button, TextField, Grid, Paper, Typography } from '@material-ui/core';
-import { GoogleSignInButton } from '../../components';
+import {Form, Input, Button, Checkbox, Card, Row} from "antd";
+import {UserOutlined, LockOutlined} from "@ant-design/icons";
 
 const LoginPage = () => {
-  const handleLogin = (event) => {
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
+  const handleForgotPassword = (event) => {
     event.preventDefault();
-    // Handle login logic here
+    console.log("Handle password recovery logic here");
+  };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    console.log("Handle registration logic here");
   };
 
   return (
-    <Grid container spacing={0} justifyContent="center" direction="row">
-      <Grid item>
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          spacing={2}
+    <Row type="flex" justify="center" align="middle" style={{minHeight: '100vh'}}>
+      <Card style={{width: 500}} title="Sign in">
+        <Form
+          name="normal_login"
           className="login-form"
+          initialValues={{remember: true}}
+          onFinish={onFinish}
         >
-          <Paper
-            variant="elevation"
-            elevation={2}
-            className="login-background"
+          <Form.Item
+            name="username"
+            rules={[{required: true, message: "Please input your Username!"}]}
           >
-            <Grid item>
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
-            </Grid>
-            <Grid item>
-              <form onSubmit={handleLogin}>
-                <Grid container direction="column" spacing={2}>
-                  <Grid item>
-                    <TextField
-                      type="email"
-                      placeholder="Email"
-                      fullWidth
-                      name="username"
-                      variant="outlined"
-                      required
-                      autoFocus
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextField
-                      type="password"
-                      placeholder="Password"
-                      fullWidth
-                      name="password"
-                      variant="outlined"
-                      required
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      className="button-block"
-                    >
-                      Submit
-                    </Button>
-                  </Grid>
-                </Grid>
-              </form>
-            </Grid>
-            <Grid item>
-              <GoogleSignInButton />
-            </Grid>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Grid>
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon"/>}
+              placeholder="Username"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{required: true, message: "Please input your Password!"}]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon"/>}
+              type="password"
+              placeholder="Password"
+            />
+
+          </Form.Item>
+          <Button
+            type="link"
+            style={{float: "right", padding: 0}}
+            className="login-form-forgot"
+            onClick={handleForgotPassword}
+          >
+            Forgot password
+          </Button>
+          <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              block
+            >
+              Log in
+            </Button>
+            Don't have an account{" "}
+            <Button style={{padding: 0}} type="link" onClick={handleRegister}>
+              sign up
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    </Row>
   );
 };
 
