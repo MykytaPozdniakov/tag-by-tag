@@ -6,7 +6,7 @@ import './HomePage.css'; // Импортируйте ваш файл стиле�
 const HomePage = () => {
   return (
     <div className="homepage">
-      <Header />
+      <Header links={[]}/>
       <div className="main-section">
       { /*<Sidebar* />*/}
         <MainContent />
