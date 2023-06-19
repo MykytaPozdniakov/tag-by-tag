@@ -33,6 +33,9 @@ const CustomHeader = ({ links }) => {
         <Menu.Item key="home">
           <Link to="/admin/home">Home</Link>
         </Menu.Item>
+        <Menu.Item key="project">
+          <Link to="/admin/project">Project</Link>
+        </Menu.Item>
         {links.map((link, index) => (
           <Menu.Item key={index}>
             <Link to={link.url}>{link.name}</Link>
