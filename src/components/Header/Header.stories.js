@@ -1,18 +1,22 @@
 import React from 'react';
-import Header from './Header';
-
+import { AuthProvider } from '../../AuthContext';
+import HeaderComponent from './Header';
 export default {
-  title: 'Header',
-  component: Header,
+  title: 'HeaderComponent',
+  component: HeaderComponent,
 };
 
-const Template = (args) => <Header {...args} />;
+const Template = (args) => (
+  <AuthProvider value={{ isAuthenticated: () => true, user: { name: 'User' } }}>
+    <HeaderComponent {...args} />
+  </AuthProvider>
+);
 
 export const Default = Template.bind({});
 Default.args = {
   links: [
-    { name: 'Home', url: '/' },
-    { name: 'Projects', url: '/projects' },
-    // Add other links here
+    { url: '/link1', name: 'Link 1' },
+    { url: '/link2', name: 'Link 2' },
+    // add more links as needed
   ],
 };

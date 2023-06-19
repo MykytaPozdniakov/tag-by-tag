@@ -5,6 +5,7 @@ import App from './App';
 import { makeServer } from './mirage';
 import { AuthProvider } from './AuthContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>

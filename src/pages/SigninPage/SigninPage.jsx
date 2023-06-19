@@ -2,7 +2,7 @@ import React from 'react';
 import {Form, Input, Button, Checkbox, Card, Row} from "antd";
 import {UserOutlined, LockOutlined} from "@ant-design/icons";
 
-const LoginPage = () => {
+const SigninPage = () => {
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -80,5 +80,5 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SigninPage;
 
