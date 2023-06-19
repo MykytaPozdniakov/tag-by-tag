@@ -1,15 +1,13 @@
 import React from 'react';
-import './Footer.css'; // Импортируйте ваш файл стилей
+import {Layout} from "antd";
+const { Footer } = Layout;
 
-const Footer = () => {
+const CustomFooter = () => {
   return (
-    <footer className="footer">
-      <div className="footer__content">
-        {/* Замените текст на ваше содержимое */}
+    <Footer style={{ textAlign: 'center' }}>
         <p>© 2023 My App. All rights reserved.</p>
-      </div>
-    </footer>
+    </Footer>
   );
 };
 
-export default Footer;
+export default CustomFooter;

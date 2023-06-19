@@ -1,12 +1,12 @@
 import React from 'react';
-import Footer from './Footer'; // Import without curly braces
+import CustomFooter from './Footer'; // Import without curly braces
 
 export default {
   title: 'Footer',
   tags: ['autodocs'],
-  component: Footer,
+  component: CustomFooter,
 };
 
-const Template = (args) => <Footer {...args} />;
+const Template = (args) => <CustomFooter {...args} />;
 
 export const Default = Template.bind({});

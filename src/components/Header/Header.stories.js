@@ -1,14 +1,14 @@
 import React from 'react';
 import { AuthProvider } from '../../AuthContext';
-import HeaderComponent from './Header';
+import CustomHeader from './Header';
 export default {
-  title: 'HeaderComponent',
-  component: HeaderComponent,
+  title: 'CustomHeader',
+  component: CustomHeader,
 };
 
 const Template = (args) => (
   <AuthProvider value={{ isAuthenticated: () => true, user: { name: 'User' } }}>
-    <HeaderComponent {...args} />
+    <CustomHeader {...args} />
   </AuthProvider>
 );
 
