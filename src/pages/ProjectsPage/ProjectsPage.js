@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, MainContent, Footer, Search, Filter, PaginationComponent, ProjectList } from '../../components';
+import { MainContent, Footer, Search, Filter, PaginationComponent, ProjectList } from '../../components';
 import './ProjectsPage.css'; // Импортируйте ваш файл стилей
 
 const ProjectsPage = () => {
@@ -24,7 +24,6 @@ const ProjectsPage = () => {
 
   return (
     <div>
-      <Header links={[]}/>
       <div>
         <MainContent>
           <div className="search-filter-container">
@@ -35,7 +34,6 @@ const ProjectsPage = () => {
           <PaginationComponent className="pagination" count={10} page={page} onChange={setPage} />
         </MainContent>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Dropdown, Button } from 'antd';
+import {Layout, Menu, Dropdown, Button, theme} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { AuthContext } from '../../AuthContext';
+import * as AuthContext from '../../AuthContext';
 
 const { Header } = Layout;
 
-const HeaderComponent = ({ links }) => {
+const CustomHeader = ({ links }) => {
   const auth = AuthContext.useAuth();
+
+  const {
+    token: {colorBgContainer},
+  } = theme.useToken();
 
   const menu = (
     <Menu>
@@ -21,23 +25,36 @@ const HeaderComponent = ({ links }) => {
   );
 
   return (
-    <Header>
-      <Menu theme="dark" mode="horizontal">
+    <Header style={{ background: colorBgContainer }}>
+      <Menu mode="horizontal">
+        <Menu.Item key="main-page">
+          <Link to="/admin">Main page</Link>
+        </Menu.Item>
+        <Menu.Item key="home">
+          <Link to="/admin/home">Home</Link>
+        </Menu.Item>
+        <Menu.Item key="project">
+          <Link to="/admin/project">Project</Link>
+        </Menu.Item>
         {links.map((link, index) => (
           <Menu.Item key={index}>
             <Link to={link.url}>{link.name}</Link>
           </Menu.Item>
         ))}
+        {auth.isAuthenticated() ? (
+          <Menu.Item key="user-profile">
+            <Dropdown overlay={menu} placement="bottomRight">
+              <Button type="link" icon={<UserOutlined />}>{'qweqwe'}</Button>
+            </Dropdown>
+          </Menu.Item>
+        ) : (
+          <Menu.Item key="singin">
+            <Link to="/signin">Sign in</Link>
+          </Menu.Item>
+        )}
       </Menu>
-      {auth.isAuthenticated() ? (
-        <Dropdown overlay={menu} placement="bottomRight">
-          <Button type="link" icon={<UserOutlined />}>{auth.user.name}</Button>
-        </Dropdown>
-      ) : (
-        <Link to="/signin">Sign in</Link>
-      )}
     </Header>
   );
 };
 
-export default HeaderComponent;
+export default CustomHeader;
