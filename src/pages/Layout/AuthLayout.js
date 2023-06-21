@@ -18,7 +18,7 @@ function RequireAuth({children}) {
   /* todo temporary for test */
   return children;
 
-  if (!auth.user) {
+  if (!auth.isAuthenticated()) {
     return <Navigate to="/signin" state={{from: location}} replace/>;
   }
 
